@@ -1,0 +1,31 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- .row -->
+<div class="row">
+    <!-- .col -->
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xlg-4" *ngFor="let usuario of usuarios">
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-md-4 col-lg-3 text-center">
+                    <a href="app-contact-detail.html"><img [src]="usuario.img | imagen:'usuario'" alt="user"
+                            class="img-circle img-responsive"></a>
+                    <small>({{usuario.cargo}})</small>
+                </div>
+                <div class="col-md-8 col-lg-9">
+                    <h3 class="box-title m-b-0">{{usuario.nombre}}</h3>
+                    <h6 class="card-subtitle">{{usuario.email}}</h6>
+                    <address>
+                        Distrito: {{usuario.distrito}}
+                        <br>
+                        <br>
+                        <abbr title="Phone">P:</abbr> {{usuario.telefono}}
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+
+<!----------------------------------------------------------------------------->

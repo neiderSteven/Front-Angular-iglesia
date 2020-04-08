@@ -1,0 +1,149 @@
+<div class="card" *ngIf="tarjetas">
+    <div class="card-body" style="text-align: center;">
+        <h4 class="card-title">Visitas ({{numeroVisitas}})</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Estudios</th>
+                        <th>Bautizado</th>
+                    </tr>
+                </thead>
+                <!--[routerLink]="['/visitas/visita', visita._id]"-->
+                <tbody>
+                    <tr *ngFor="let visita of visitas" [routerLink]="['/visitas', visita._id]" (click)="ver(visita)">
+                        <td>{{visita.nombre}}</td>
+                        <td>{{visita.telefono}}</td>
+                        <td>
+                            <h5>
+                                Fe de Jesus
+                                <span class="pull-right">{{visita.estudios}}0%</span>
+                            </h5>
+                            <div class="progress progress-xs margin-vertical-10 ">
+                                <div *ngIf="visita.estudios==0" class="progress-bar bg-danger"
+                                    style="width: 0%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==1" class="progress-bar bg-danger"
+                                    style="width: 10%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==2" class="progress-bar bg-danger"
+                                    style="width: 20%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==3" class="progress-bar bg-inverse"
+                                    style="width: 30%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==4" class="progress-bar bg-inverse"
+                                    style="width: 40%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==5" class="progress-bar bg-primary"
+                                    style="width: 50%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==6" class="progress-bar bg-primary"
+                                    style="width: 60%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==7" class="progress-bar bg-info"
+                                    style="width: 70%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==8" class="progress-bar bg-info"
+                                    style="width: 80%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==9" class="progress-bar bg-success"
+                                    style="width: 90%; height:6px;"></div>
+                                <div *ngIf="visita.estudios==10" class="progress-bar bg-succes"
+                                    style="width: 100%; height:6px;"></div>
+                            </div>
+                        </td>
+                        <td>{{visita.bautizada}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-inline col-md-12">
+            <button (click)="info()" type="button" class="col-md-5 btn waves-light btn-rounded btn-success m-2">
+                <i class="fa fa-plus"></i>
+                Crear Visitas
+            </button>
+            <button (click)="volver()" type="button" class="col-md-5 btn waves-light btn-rounded btn-inverse">
+                <i class="fa fa-reply"></i>
+                volver
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--formulario-->
+<div class="card" *ngIf="!tarjetas">
+    <div class="card-body">
+        <!--ngNativeValidate #f="ngForm" (ngSubmit)="crear(f)" // [(ngModel)]="nombre"-->
+        <form ngNativeValidate [formGroup]="visitaForm" class="form-horizontal">
+            <div class="form-body">
+                <h3 class="box-title">Informacion sobre la visita</h3>
+                <hr class="m-t-0 m-b-40">
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label text-right col-md-3">Nombre</label>
+                            <div class="col-md-9">
+                                <input matInput formControlName="nombre" id="nombre" name="nombre" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label text-right col-md-3">Telefono</label>
+                            <div class="col-md-9">
+                                <input matInput formControlName="telefono" name="telefono" type="number" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label text-right col-md-3">Direccion</label>
+                            <div class="col-md-9">
+                                <input matInput formControlName="direccion" name="direccion" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label text-right col-md-3">Estudios</label>
+                            <div class="col-md-9">
+                                <input matInput formControlName="estudios" name="estudios" type="number" required>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/span-->
+                </div>
+                <!--/row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="control-label text-right col-md-3">Bautizado</label>
+                            <div class="col-md-9">
+                                <input matInput formControlName="bautizada" name="bautizada" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/row-->
+            </div>
+            <hr>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-12">
+                                <button *ngIf="botones" (click)="crear()" type="button"
+                                    class="btn btn-success btn-rounded m-2">Crear</button>
+                                <button *ngIf="!botones" (click)="actualizar()" type="button"
+                                    class="btn btn-success btn-rounded m-2">Actualizar</button>
+                                <button *ngIf="!botones" (click)="eliminar()" type="button"
+                                    class="btn btn-danger btn-rounded">Eliminar</button>
+                                <button (click)="cancelar()" type="button"
+                                    class="btn btn-inverse btn-rounded m-2">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

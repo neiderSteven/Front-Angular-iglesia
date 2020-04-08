@@ -1,0 +1,69 @@
+<!--Tarjeta de busqueda-->
+<div class="row animated fadeIn">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="controls">
+                    <div class="input-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-world"></i></div>
+                            <input #input (keyup)="buscarIglesias(input.value)" type="text" class="form-control"
+                                placeholder="Buscar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="card col-md-12" style="background-color: transparent">
+            <button [routerLink]="['/iglesias', 'nuevo']" type="button" class="btn waves-light btn-rounded btn-primary">
+                <i class="fa fa-plus"></i>
+                Crear Iglesias
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--Cargando-->
+<div class="row animated fadeIn" *ngIf="!iglesias">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<!--Tarjetas de iglesias -->
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4" *ngFor="let iglesia of iglesias">
+                <div class="card">
+                    <img [src]="iglesia.img | imagen:'iglesia'" class="card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title"><strong>Iglesia:</strong> {{iglesia.nombre}}</h3>
+                        <h5 class="card-text"><strong>Anciano:</strong> {{iglesia.anciano}}</h5>
+                        <h5 class="card-text"><strong># Miembros:</strong> {{iglesia.numeroMiembros}}</h5>
+                        <h5 class="card-text"><small class="text-muted"><strong>Direccion:</strong>
+                                {{iglesia.direccion}}</small>
+                        </h5>
+
+                        <button style="margin: 10px" [routerLink]="['/iglesias', iglesia._id]" class="btn btn-primary">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button (click)="borrar(iglesia)" class="btn btn-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
